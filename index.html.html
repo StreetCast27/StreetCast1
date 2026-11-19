@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STREETCAST // UNDERGROUND STREETWEAR KAZAKHSTAN</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Oswald -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                    },
+                    colors: {
+                        void: '#070707',
+                        obsidian: '#0f0f0f',
+                        asphalt: '#161616',
+                        steel: '#888888',
+                        ash: '#262626',
+                    },
+                    animation: {
+                        'marquee': 'marquee 28s linear infinite',
+                        'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #070707;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 45;
+            opacity: 0.038;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070707;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2e2e2e;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffffff;
+        }
+
+        .logo-medallion {
+            border-radius: 9999px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.08), inset 0 0 15px rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background-color: #050505;
+        }
+        .logo-medallion img {
+            transform: scale(1.04);
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Неоново-белые импульсы по линиям сетки из квадратов на главном экране */
+        .hero-grid-pulse-h {
+            position: absolute;
+            left: 0;
+            height: 1px;
+            width: 180px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), #ffffff, rgba(255, 255, 255, 0.85), transparent);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 22px rgba(255, 255, 255, 0.45);
+            pointer-events: none;
+        }
+
+        .hero-grid-pulse-v {
+            position: absolute;
+            top: 0;
+            width: 1px;
+            height: 180px;
+            background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.85), #ffffff, rgba(255, 255, 255, 0.85), transparent);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 22px rgba(255, 255, 255, 0.45);
+            pointer-events: none;
+        }
+
+        .pulse-right-1 {
+            top: 96px;
+            animation: scanRight 7s linear infinite;
+        }
+        .pulse-right-2 {
+            top: 288px;
+            animation: scanRight 9.5s linear 2.5s infinite;
+        }
+        .pulse-left-1 {
+            top: 192px;
+            animation: scanLeft 8s linear 1s infinite;
+        }
+        .pulse-left-2 {
+            top: 384px;
+            animation: scanLeft 10.5s linear 4s infinite;
+        }
+        .pulse-down-1 {
+            left: 192px;
+            animation: scanDown 7.5s linear 0.5s infinite;
+        }
+        .pulse-down-2 {
+            left: 576px;
+            animation: scanDown 9s linear 3.2s infinite;
+        }
+        .pulse-up-1 {
+            left: 384px;
+            animation: scanUp 8.5s linear 1.8s infinite;
+        }
+        .pulse-up-2 {
+            left: 768px;
+            animation: scanUp 10s linear 4.5s infinite;
+        }
+
+        @keyframes scanRight {
+            0% { left: -200px; opacity: 0; }
+            15% { opacity: 0.9; }
+            85% { opacity: 0.9; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        @keyframes scanLeft {
+            0% { left: 100%; opacity: 0; }
+            15% { opacity: 0.9; }
+            85% { opacity: 0.9; }
+            100% { left: -200px; opacity: 0; }
+        }
+
+        @keyframes scanDown {
+            0% { top: -200px; opacity: 0; }
+            15% { opacity: 0.85; }
+            85% { opacity: 0.85; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        @keyframes scanUp {
+            0% { top: 100%; opacity: 0; }
+            15% { opacity: 0.85; }
+            85% { opacity: 0.85; }
+            100% { top: -200px; opacity: 0; }
+        }
+
+        /* Разделенный вертикально круг с выбором мужского/женского силуэта */
+        .gender-split-circle {
+            position: relative;
+            border-radius: 9999px;
+            overflow: hidden;
+            background: #060606;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 0 90px rgba(255, 255, 255, 0.12), inset 0 0 30px rgba(0, 0, 0, 0.95);
+        }
+
+        .gender-half {
+            transition: background 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .gender-half:hover .mannequin-svg {
+            transform: translateY(-4px) scale(1.05);
+            filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.55));
+        }
+
+        .mannequin-svg {
+            transition: transform 0.35s ease, filter 0.35s ease;
+        }
+
+        .glass-header {
+            background: rgba(7, 7, 7, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .product-card {
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 255, 255, 0.04);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black">
+
+    <div class="noise-overlay"></div>
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-header border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#top" class="flex items-center gap-3.5 group">
+                <div class="logo-medallion w-12 h-12 sm:w-13 sm:h-13 transition-transform duration-500 group-hover:scale-105 group-hover:rotate-3">
+                    <img src="Gemini_Generated_Image_f0duqyf0duqyf0du_2.jpg" alt="StreetCast Emblem" onerror="this.onerror=null; this.src='https://placehold.co/200x200/080808/ffffff?text=SC';">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-bold text-xl sm:text-2xl tracking-[0.18em] uppercase text-white leading-none">STREETCAST</span>
+                    <span class="text-[10px] tracking-[0.28em] text-steel uppercase mt-1">UNDERGROUND ARCHIVE KZ</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-xs font-semibold tracking-[0.2em] uppercase text-steel">
+                <a href="#drops" class="hover:text-white transition-colors py-2 relative">Дропы</a>
+                <a href="#catalog" class="hover:text-white transition-colors py-2 relative">Каталог</a>
+                <a href="#lookbook" class="hover:text-white transition-colors py-2 relative">Лукбук</a>
+                <a href="#about" class="hover:text-white transition-colors py-2 relative">О бренде</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button onclick="toggleCart(true)" aria-label="Открыть корзину" class="relative flex items-center gap-2.5 bg-asphalt hover:bg-white hover:text-black text-white border border-white/15 px-4 py-2.5 rounded-lg transition-all duration-300 group">
+                    <i class="fa-solid fa-bag-shopping text-sm"></i>
+                    <span class="hidden sm:inline text-xs font-bold tracking-[0.15em] uppercase">Корзина</span>
+                    <span id="cart-badge" class="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-[11px] font-black bg-white text-black group-hover:bg-black group-hover:text-white rounded-full transition-colors">0</span>
+                </button>
+                <button onclick="toggleMobileMenu()" aria-label="Меню" class="md:hidden p-2.5 rounded-lg bg-asphalt border border-white/15 text-white hover:bg-white/10">
+                    <i id="mobile-menu-icon" class="fa-solid fa-bars text-base"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-obsidian border-b border-white/10 px-6 py-5 space-y-4">
+            <a href="#drops" onclick="toggleMobileMenu()" class="block text-sm font-bold tracking-[0.2em] uppercase text-white/80 hover:text-white py-1">Дропы // NEW DROP</a>
+            <a href="#catalog" onclick="toggleMobileMenu()" class="block text-sm font-bold tracking-[0.2em] uppercase text-white/80 hover:text-white py-1">Каталог одежды</a>
+            <a href="#lookbook" onclick="toggleMobileMenu()" class="block text-sm font-bold tracking-[0.2em] uppercase text-white/80 hover:text-white py-1">Лукбук FW26</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-sm font-bold tracking-[0.2em] uppercase text-white/80 hover:text-white py-1">О бренде / Манифест</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="top" class="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden border-b border-white/10">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.07)_0%,rgba(7,7,7,0)_65%)] pointer-events-none"></div>
+        <!-- Сетка из квадратов на фоне + белые неоновые импульсы вдоль линий сетки -->
+        <div class="absolute inset-0 opacity-[0.05] pointer-events-none" style="background-image: linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px); background-size: 48px 48px;"></div>
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <span class="hero-grid-pulse-h pulse-right-1"></span>
+            <span class="hero-grid-pulse-h pulse-right-2"></span>
+            <span class="hero-grid-pulse-h pulse-left-1"></span>
+            <span class="hero-grid-pulse-h pulse-left-2"></span>
+            <span class="hero-grid-pulse-v pulse-down-1"></span>
+            <span class="hero-grid-pulse-v pulse-down-2"></span>
+            <span class="hero-grid-pulse-v pulse-up-1"></span>
+            <span class="hero-grid-pulse-v pulse-up-2"></span>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-[11px] font-bold tracking-[0.25em] uppercase text-white/90">
+                        <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
+                        NEW DROP // KAZAKHSTAN EDITION
+                    </div>
+
+                    <h1 class="font-display font-bold text-5xl sm:text-7xl xl:text-8xl uppercase tracking-tight leading-[0.92] text-white">
+                        CAST IN <span class="text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-600">CONCRETE.</span><br>
+                        BORN IN THE STREETS.
+                    </h1>
+
+                    <p class="text-steel text-sm sm:text-base max-w-xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                        Тяжелый хлопок 520 GSM, агрессивная нео-готика и лимитированные тиражи без ресток-повторов. Локальный андеграунд-бренд из Казахстана с доставкой по всей стране.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#catalog" class="w-full sm:w-auto px-8 py-4 bg-white text-black font-black text-xs tracking-[0.22em] uppercase rounded-lg hover:bg-zinc-200 transition-all shadow-[0_0_30px_rgba(255,255,255,0.2)] flex items-center justify-center gap-3">
+                            <span>СМОТРЕТЬ ДРОП</span>
+                            <i class="fa-solid fa-arrow-down-right"></i>
+                        </a>
+                        <a href="#lookbook" class="w-full sm:w-auto px-8 py-4 bg-asphalt text-white border border-white/20 font-bold text-xs tracking-[0.22em] uppercase rounded-lg hover:border-white hover:bg-white/5 transition-all flex items-center justify-center gap-2">
+                            <span>ЛУКБУК</span>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 max-w-md mx-auto lg:mx-0 text-left">
+                        <div>
+                            <div class="font-display text-2xl font-bold text-white">520 GSM</div>
+                            <div class="text-[11px] text-steel uppercase tracking-wider">Heavyweight Футер</div>
+                        </div>
+                        <div>
+                            <div class="font-display text-2xl font-bold text-white">100 ШТ.</div>
+                            <div class="text-[11px] text-steel uppercase tracking-wider">Лимит на модель</div>
+                        </div>
+                        <div>
+                            <div class="font-display text-2xl font-bold text-white">0% RESTOCK</div>
+                            <div class="text-[11px] text-steel uppercase tracking-wider">Архивный релиз</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- УВЕЛИЧЕННЫЙ КРУГ С ВЕРТИКАЛЬНЫМ РАЗДЕЛЕНИЕМ И АНАТОМИЧЕСКИМИ СИЛУЭТАМИ МУЖЧИНЫ И ЖЕНЩИНЫ -->
+                <div class="lg:col-span-6 flex flex-col items-center justify-center relative">
+                    <div class="absolute w-[350px] h-[350px] sm:w-[460px] sm:h-[460px] lg:w-[495px] lg:h-[495px] rounded-full border border-dashed border-white/15 animate-[spin_45s_linear_infinite] pointer-events-none"></div>
+                    <div class="absolute w-[390px] h-[390px] sm:w-[510px] sm:h-[510px] lg:w-[545px] lg:h-[545px] rounded-full border border-white/5 pointer-events-none"></div>
+
+                    <div class="gender-split-circle w-[310px] h-[310px] sm:w-[400px] sm:h-[400px] lg:w-[435px] lg:h-[435px] relative z-10 animate-float grid grid-cols-2">
+                        <!-- Вертикальная разделительная линия -->
+                        <div class="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[1.5px] bg-gradient-to-b from-white/10 via-white/80 to-white/10 shadow-[0_0_14px_rgba(255,255,255,0.7)] z-20 pointer-events-none"></div>
+
+                        <!-- Левая половина: Мужской силуэт -->
+                        <button type="button" id="gender-btn-male" onclick="selectGenderFit('male')" aria-label="Мужской подбор одежды" class="gender-half relative h-full flex flex-col items-center justify-between py-6 sm:py-8 px-3 bg-gradient-to-b from-[#17171a] via-[#0c0c0e] to-[#050505] hover:from-[#222227] focus:outline-none group">
+                            <span class="text-[10px] sm:text-[11px] font-mono tracking-[0.28em] uppercase text-steel group-hover:text-white transition-colors z-10">MEN</span>
+
+                            <!-- Реалистичный анатомический мужской силуэт (как на референсе) -->
+                            <svg viewBox="0 0 140 280" class="mannequin-svg h-[185px] sm:h-[245px] lg:h-[270px] w-auto my-auto">
+                                <path d="
+                                    M70 12
+                                    C60 12 55 18 55 27
+                                    C55 29 53 30 53 33
+                                    C53 37 55 39 56 39
+                                    C57 43 59 46 60 48
+                                    L58 55
+                                    C47 59 35 61 30 66
+                                    C24 72 24 85 22 99
+                                    C20 112 17 125 16 138
+                                    C15 145 14 150 15 155
+                                    C16 159 19 162 21 162
+                                    C22 162 21 157 20 154
+                                    C20 152 21 151 22 153
+                                    C23 156 24 161 26 161
+                                    C28 161 29 156 29 151
+                                    C29 146 28 141 27 137
+                                    C29 124 33 111 35 98
+                                    C37 91 38 86 39 83
+                                    C41 94 44 106 45 117
+                                    C45 126 42 136 42 148
+                                    C42 165 44 182 47 198
+                                    C46 213 46 229 48 245
+                                    C49 253 48 258 43 263
+                                    C39 267 39 270 46 270
+                                    C53 270 59 269 60 264
+                                    C60 258 59 251 59 244
+                                    C61 228 63 212 63 197
+                                    C65 181 67 164 68 148
+                                    L70 146
+                                    L72 148
+                                    C73 164 75 181 77 197
+                                    C77 212 79 228 81 244
+                                    C81 251 80 258 80 264
+                                    C81 269 87 270 94 270
+                                    C101 270 101 267 97 263
+                                    C92 258 91 253 92 245
+                                    C94 229 94 213 93 198
+                                    C96 182 98 165 98 148
+                                    C98 136 95 126 95 117
+                                    C96 106 99 94 101 83
+                                    C102 86 103 91 105 98
+                                    C107 111 111 124 113 137
+                                    C112 141 111 146 111 151
+                                    C111 156 112 161 114 161
+                                    C116 161 117 156 118 153
+                                    C119 151 120 152 120 154
+                                    C119 157 118 162 119 162
+                                    C121 162 124 159 125 155
+                                    C126 150 125 145 124 138
+                                    C123 125 120 112 118 99
+                                    C116 85 116 72 110 66
+                                    C105 61 93 59 82 55
+                                    L80 48
+                                    C81 46 83 43 84 39
+                                    C85 39 87 37 87 33
+                                    C87 30 85 29 85 27
+                                    C85 18 80 12 70 12 Z"
+                                    fill="#050506"
+                                    stroke="rgba(255,255,255,0.42)"
+                                    stroke-width="1.35"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+
+                            <span class="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-white/85 group-hover:text-white z-10">МУЖСКОЕ</span>
+                        </button>
+
+                        <!-- Правая половина: Женский силуэт -->
+                        <button type="button" id="gender-btn-female" onclick="selectGenderFit('female')" aria-label="Женский подбор одежды" class="gender-half relative h-full flex flex-col items-center justify-between py-6 sm:py-8 px-3 bg-gradient-to-b from-[#17171a] via-[#0c0c0e] to-[#050505] hover:from-[#222227] focus:outline-none group">
+                            <span class="text-[10px] sm:text-[11px] font-mono tracking-[0.28em] uppercase text-steel group-hover:text-white transition-colors z-10">WOMEN</span>
+
+                            <!-- Реалистичный анатомический женский силуэт (как на референсе) -->
+                            <svg viewBox="0 0 140 280" class="mannequin-svg h-[185px] sm:h-[245px] lg:h-[270px] w-auto my-auto">
+                                <path d="
+                                    M70 14
+                                    C61 14 57 20 57 28
+                                    C57 30 55 31 55 34
+                                    C55 37 57 39 58 39
+                                    C59 43 61 46 62 49
+                                    L60 56
+                                    C50 59 41 61 37 66
+                                    C33 72 32 84 30 97
+                                    C27 110 23 123 21 135
+                                    C20 141 19 146 20 151
+                                    C21 155 24 158 26 158
+                                    C27 158 26 153 25 150
+                                    C25 148 26 147 27 149
+                                    C28 152 29 156 30 156
+                                    C32 156 33 151 33 147
+                                    C33 142 32 138 31 134
+                                    C34 122 38 109 41 97
+                                    C43 90 44 85 45 82
+                                    C47 92 50 102 50 110
+                                    C50 117 43 127 42 139
+                                    C41 154 44 174 48 194
+                                    C48 210 49 227 52 244
+                                    C53 252 52 258 48 263
+                                    C45 267 45 270 51 270
+                                    C57 270 61 268 62 263
+                                    C62 257 61 250 61 243
+                                    C63 227 65 210 65 194
+                                    C67 177 68 160 69 145
+                                    L70 143
+                                    L71 145
+                                    C72 160 73 177 75 194
+                                    C75 210 77 227 79 243
+                                    C79 250 78 257 78 263
+                                    C79 268 83 270 89 270
+                                    C95 270 95 267 92 263
+                                    C88 258 87 252 88 244
+                                    C91 227 92 210 92 194
+                                    C96 174 99 154 98 139
+                                    C97 127 90 117 90 110
+                                    C90 102 93 92 95 82
+                                    C96 85 97 90 99 97
+                                    C102 109 106 122 109 134
+                                    C108 138 107 142 107 147
+                                    C107 151 108 156 110 156
+                                    C111 156 112 152 113 149
+                                    C114 147 115 148 115 150
+                                    C114 153 113 158 114 158
+                                    C116 158 119 155 120 151
+                                    C121 146 120 141 119 135
+                                    C117 123 113 110 110 97
+                                    C108 84 107 72 103 66
+                                    C99 61 90 59 80 56
+                                    L78 49
+                                    C79 46 81 43 82 39
+                                    C83 39 85 37 85 34
+                                    C85 31 83 30 83 28
+                                    C83 20 79 14 70 14 Z"
+                                    fill="#050506"
+                                    stroke="rgba(255,255,255,0.42)"
+                                    stroke-width="1.35"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+
+                            <span class="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-white/85 group-hover:text-white z-10">ЖЕНСКОЕ</span>
+                        </button>
+                    </div>
+
+                    <div id="gender-selection-hint" class="mt-6 flex flex-wrap items-center justify-center gap-2 text-[11px] font-mono tracking-[0.2em] text-steel uppercase text-center">
+                        <span>ВЫБЕРИ МАНЕКЕН ДЛЯ ПОДБОРА</span>
+                        <span>•</span>
+                        <button type="button" onclick="selectGenderFit('all')" class="underline hover:text-white transition-colors">ВСЕ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="bg-white text-black py-3 border-y border-white overflow-hidden select-none">
+        <div class="flex whitespace-nowrap animate-marquee font-display font-bold text-sm sm:text-base tracking-[0.25em] uppercase">
+            <span class="mx-6">STREETCAST // NEW DROP LIVE NOW</span>
+            <span class="mx-6">✦</span>
+            <span class="mx-6">LIMITED EDITION UNDERGROUND APPAREL</span>
+            <span class="mx-6">✦</span>
+            <span class="mx-6">ДОСТАВКА ПО ВСЕМУ КАЗАХСТАНУ</span>
+            <span class="mx-6">✦</span>
+            <span class="mx-6">БЕСПЛАТНАЯ ДОСТАВКА ОТ 30 000 ₸</span>
+            <span class="mx-6">✦</span>
+            <span class="mx-6">STREETCAST // NEW DROP LIVE NOW</span>
+            <span class="mx-6">✦</span>
+            <span class="mx-6">LIMITED EDITION UNDERGROUND APPAREL</span>
+            <span class="mx-6">✦</span>
+            <span class="mx-6">ДОСТАВКА ПО ВСЕМУ КАЗАХСТАНУ</span>
+            <span class="mx-6">✦</span>
+            <span class="mx-6">БЕСПЛАТНАЯ ДОСТАВКА ОТ 30 000 ₸</span>
+            <span class="mx-6">✦</span>
+        </div>
+    </div>
+
+    <!-- DROP BANNER / TIMER -->
+    <section id="drops" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+        <div class="bg-obsidian border border-white/15 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+            <div class="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-white/[0.04] to-transparent pointer-events-none"></div>
+            
+            <div class="space-y-1.5 text-center md:text-left">
+                <div class="text-[11px] font-bold tracking-[0.25em] text-steel uppercase">АКТУАЛЬНЫЙ РЕЛИЗ // ARCHIVE</div>
+                <h2 class="font-display text-2xl sm:text-3xl font-bold uppercase tracking-wide text-white">
+                    КОЛЛЕКЦИЯ «CONCRETE & BONE» В ПРОДАЖЕ
+                </h2>
+                <p class="text-xs sm:text-sm text-steel">Каждая вещь имеет индивидуальный порядковый номер на внутренней бирке.</p>
+            </div>
+
+            <div class="flex items-center gap-3 sm:gap-4 bg-void px-5 py-3.5 rounded-xl border border-white/10">
+                <div class="text-center">
+                    <div id="timer-days" class="font-display text-2xl sm:text-3xl font-bold text-white">04</div>
+                    <div class="text-[10px] text-steel uppercase tracking-widest">Дней</div>
+                </div>
+                <span class="text-white/30 font-bold text-xl">:</span>
+                <div class="text-center">
+                    <div id="timer-hours" class="font-display text-2xl sm:text-3xl font-bold text-white">18</div>
+                    <div class="text-[10px] text-steel uppercase tracking-widest">Часов</div>
+                </div>
+                <span class="text-white/30 font-bold text-xl">:</span>
+                <div class="text-center">
+                    <div id="timer-mins" class="font-display text-2xl sm:text-3xl font-bold text-white">42</div>
+                    <div class="text-[10px] text-steel uppercase tracking-widest">Мин</div>
+                </div>
+                <span class="text-white/30 font-bold text-xl">:</span>
+                <div class="text-center">
+                    <div id="timer-secs" class="font-display text-2xl sm:text-3xl font-bold text-white">19</div>
+                    <div class="text-[10px] text-steel uppercase tracking-widest">Сек</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATALOG SECTION -->
+    <section id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+                <div id="catalog-gender-label" class="text-xs font-bold tracking-[0.28em] text-steel uppercase mb-2">КАТАЛОГ // NEW DROP</div>
+                <h2 class="font-display text-4xl sm:text-5xl font-bold uppercase tracking-tight text-white">
+                    ЛИМИТИРОВАННЫЕ АЙТЕМЫ
+                </h2>
+            </div>
+
+            <div id="category-filters" class="flex flex-wrap gap-2">
+                <button data-category="all" class="filter-btn active px-4 py-2.5 rounded-lg text-xs font-bold tracking-[0.15em] uppercase bg-white text-black border border-white transition-all">Все</button>
+                <button data-category="hoodies" class="filter-btn px-4 py-2.5 rounded-lg text-xs font-bold tracking-[0.15em] uppercase bg-asphalt text-steel hover:text-white border border-white/10 transition-all">Худи</button>
+                <button data-category="tees" class="filter-btn px-4 py-2.5 rounded-lg text-xs font-bold tracking-[0.15em] uppercase bg-asphalt text-steel hover:text-white border border-white/10 transition-all">Футболки</button>
+                <button data-category="pants" class="filter-btn px-4 py-2.5 rounded-lg text-xs font-bold tracking-[0.15em] uppercase bg-asphalt text-steel hover:text-white border border-white/10 transition-all">Штаны</button>
+                <button data-category="accessories" class="filter-btn px-4 py-2.5 rounded-lg text-xs font-bold tracking-[0.15em] uppercase bg-asphalt text-steel hover:text-white border border-white/10 transition-all">Аксессуары</button>
+            </div>
+        </div>
+
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7"></div>
+    </section>
+
+    <!-- LOOKBOOK SECTION -->
+    <section id="lookbook" class="border-t border-white/10 bg-obsidian py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+                <div>
+                    <div class="text-xs font-bold tracking-[0.28em] text-steel uppercase mb-2">VISUAL ARCHIVE</div>
+                    <h2 class="font-display text-4xl sm:text-5xl font-bold uppercase tracking-tight text-white">ЛУКБУК // NIGHT SHIFT</h2>
+                </div>
+                <p class="text-xs sm:text-sm text-steel max-w-md">Съемка в индустриальных промзонах и бетонных тоннелях. Оверсайз-силуэты, кислотная варка и вышивка высокой плотности.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="group relative rounded-2xl overflow-hidden border border-white/15 bg-void aspect-[4/5] flex flex-col justify-between p-6">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,#262626_0%,#070707_80%)] opacity-90"></div>
+                    <div class="relative z-10 flex justify-between items-center text-[11px] font-mono text-steel">
+                        <span>LOOK 01 // SECTOR A</span><span>520 GSM</span>
+                    </div>
+                    <div class="relative z-10 my-auto flex flex-col items-center">
+                        <div class="logo-medallion w-36 h-36 opacity-80 group-hover:scale-110 transition-transform duration-700">
+                            <img src="Gemini_Generated_Image_f0duqyf0duqyf0du_2.jpg" alt="Lookbook 01" onerror="this.onerror=null; this.src='https://placehold.co/300x300/080808/ffffff?text=SC';">
+                        </div>
+                        <span class="mt-4 font-display text-2xl tracking-[0.2em] uppercase text-white/90">DISTRESSED SET</span>
+                    </div>
+                    <div class="relative z-10 border-t border-white/10 pt-4 flex justify-between items-center">
+                        <span class="text-xs font-bold uppercase tracking-wider">Худи «SC-01» + Карго «Shadow»</span>
+                        <a href="#catalog" class="text-xs underline text-steel hover:text-white">Купить →</a>
+                    </div>
+                </div>
+
+                <div class="group relative rounded-2xl overflow-hidden border border-white/15 bg-void aspect-[4/5] flex flex-col justify-between p-6">
+                    <div class="absolute inset-0 bg-[linear-gradient(135deg,#1d1d1d_0%,#050505_75%)]"></div>
+                    <div class="relative z-10 flex justify-between items-center text-[11px] font-mono text-steel">
+                        <span>LOOK 02 // UNDERGROUND</span><span>ACID WASH</span>
+                    </div>
+                    <div class="relative z-10 my-auto text-center space-y-3">
+                        <div class="inline-block px-3 py-1 border border-white/30 text-[10px] tracking-[0.3em] uppercase text-white">GOTHIC LETTERING</div>
+                        <div class="font-display text-5xl font-bold uppercase tracking-tighter text-white leading-none">NO MERCY<br>NO RULES</div>
+                        <p class="text-xs text-steel max-w-[220px] mx-auto">Свободный крой со спущенным плечом и состаренными швами.</p>
+                    </div>
+                    <div class="relative z-10 border-t border-white/10 pt-4 flex justify-between items-center">
+                        <span class="text-xs font-bold uppercase tracking-wider">Зип-худи «Skull» + Шапка «Cast»</span>
+                        <a href="#catalog" class="text-xs underline text-steel hover:text-white">Купить →</a>
+                    </div>
+                </div>
+
+                <div class="group relative rounded-2xl overflow-hidden border border-white/15 bg-void aspect-[4/5] flex flex-col justify-between p-6">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom,#242424_0%,#060606_75%)]"></div>
+                    <div class="relative z-10 flex justify-between items-center text-[11px] font-mono text-steel">
+                        <span>LOOK 03 // CONCRETE</span><span>925 SILVER</span>
+                    </div>
+                    <div class="relative z-10 my-auto flex flex-col items-center text-center">
+                        <i class="fa-solid fa-cross text-5xl text-white/80 mb-4 group-hover:rotate-12 transition-transform duration-500"></i>
+                        <div class="font-display text-3xl font-bold uppercase tracking-[0.15em] text-white">HEAVY METAL</div>
+                        <div class="text-xs text-steel mt-2">Массивные цепи и подвески с готической гравировкой</div>
+                    </div>
+                    <div class="relative z-10 border-t border-white/10 pt-4 flex justify-between items-center">
+                        <span class="text-xs font-bold uppercase tracking-wider">Футболка «Gothic» + Подвеска</span>
+                        <a href="#catalog" class="text-xs underline text-steel hover:text-white">Купить →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div class="bg-obsidian border border-white/15 rounded-3xl p-8 sm:p-14 relative overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-4 flex justify-center">
+                    <div class="logo-medallion w-48 h-48 sm:w-60 sm:h-60">
+                        <img src="Gemini_Generated_Image_f0duqyf0duqyf0du_2.jpg" alt="StreetCast Philosophy" onerror="this.onerror=null; this.src='https://placehold.co/400x400/080808/ffffff?text=STREETCAST';">
+                    </div>
+                </div>
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="text-xs font-bold tracking-[0.28em] text-steel uppercase">МАНИФЕСТ БРЕНДА // О НАС</div>
+                    <h2 class="font-display text-3xl sm:text-5xl font-bold uppercase tracking-tight text-white leading-tight">
+                        МЫ НЕ СЛЕДУЕМ ТРЕНДАМ. МЫ СОЗДАЕМ ТРЕНД
+                    </h2>
+                    <p class="text-steel text-sm sm:text-base leading-relaxed">
+                        <strong class="text-white">StreetCast</strong> — независимый streetwear-бренд из Казахстана, рожденный на стыке андеграунд-сцены, тяжелой музыки и индустриальной архитектуры. Каждое изделие шьется из плотного премиального хлопка и выпускается строго ограниченным тиражом.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                        <div class="bg-void/80 border border-white/10 p-4 rounded-xl">
+                            <i class="fa-solid fa-layer-group text-white mb-2"></i>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-white">Плотный хлопок</h3>
+                            <p class="text-xs text-steel mt-1">Футер 480–520 г/м².</p>
+                        </div>
+                        <div class="bg-void/80 border border-white/10 p-4 rounded-xl">
+                            <i class="fa-solid fa-skull text-white mb-2"></i>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-white">Готик-гранж</h3>
+                            <p class="text-xs text-steel mt-1">Авторский леттеринг.</p>
+                        </div>
+                        <div class="bg-void/80 border border-white/10 p-4 rounded-xl">
+                            <i class="fa-solid fa-truck-fast text-white mb-2"></i>
+                            <h3 class="text-xs font-bold uppercase tracking-wider text-white">Доставка по РК</h3>
+                            <p class="text-xs text-steel mt-1">Отправка по всему Казахстану за 24 часа.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-obsidian border-t border-white/10 pt-14 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3.5">
+                        <div class="logo-medallion w-12 h-12">
+                            <img src="Gemini_Generated_Image_f0duqyf0duqyf0du_2.jpg" alt="Logo" onerror="this.onerror=null; this.src='https://placehold.co/150x150/080808/ffffff?text=SC';">
+                        </div>
+                        <span class="font-display font-bold text-2xl tracking-[0.2em] uppercase text-white">STREETCAST</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-steel max-w-sm leading-relaxed">Независимый streetcast из Казахстана. Эстетика ночных улиц и бескомпромиссный андеграунд-стиль.</p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="https://www.instagram.com/_streetcast_?knvt=MWkya2h4bWw4Z3FnNA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-lg bg-asphalt border border-white/15 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-instagram text-lg"></i></a>
+                        <a href="https://www.tiktok.com/@1streetcast?_r=1&_t=ZS-9BXtO7jKshY" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="w-10 h-10 rounded-lg bg-asphalt border border-white/15 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"><i class="fa-brands fa-tiktok text-lg"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-[0.22em] text-white mb-4">Навигация</h4>
+                    <ul class="space-y-2.5 text-xs text-steel">
+                        <li><a href="#drops" class="hover:text-white transition-colors">Новый дроп</a></li>
+                        <li><a href="#catalog" class="hover:text-white transition-colors">Каталог товаров</a></li>
+                        <li><a href="#lookbook" class="hover:text-white transition-colors">Лукбук коллекции</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors">Манифест бренда</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-[0.22em] text-white mb-4">Покупателям</h4>
+                    <ul class="space-y-2.5 text-xs text-steel">
+                        <li><button onclick="openInfoModal('delivery')" class="hover:text-white transition-colors text-left">Доставка и оплата по РК</button></li>
+                        <li><button onclick="openInfoModal('returns')" class="hover:text-white transition-colors text-left">Обмен и возврат</button></li>
+                        <li><button onclick="openInfoModal('sizing')" class="hover:text-white transition-colors text-left">Таблица размеров</button></li>
+                        <li class="pt-1 text-white/70 font-mono">streetcast27@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-steel">
+                <div>© 2026 STREETCAST KAZAKHSTAN. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</div>
+                <div class="tracking-[0.2em] uppercase">CAST IN CONCRETE // BORN IN THE STREETS</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART DRAWER -->
+    <div id="cart-backdrop" onclick="toggleCart(false)" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+
+    <aside id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-obsidian border-l border-white/15 z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="px-6 py-5 border-b border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-bag-shopping text-white"></i>
+                <h3 class="font-display text-xl font-bold uppercase tracking-wider text-white">Корзина</h3>
+                <span id="drawer-count" class="text-xs font-mono text-steel">(0)</span>
+            </div>
+            <button onclick="toggleCart(false)" aria-label="Закрыть" class="w-9 h-9 rounded-lg bg-asphalt border border-white/10 text-steel hover:text-white flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+
+        <div id="cart-footer" class="border-t border-white/10 p-6 bg-void space-y-4 hidden">
+            <div class="space-y-1.5 text-sm">
+                <div class="flex justify-between text-steel text-xs">
+                    <span>Доставка по Казахстану</span>
+                    <span id="shipping-cost">Бесплатно</span>
+                </div>
+                <div class="flex justify-between items-center pt-2 border-t border-white/10">
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-steel">Итого к оплате</span>
+                    <span id="cart-total" class="font-display text-2xl font-bold text-white">0 ₸</span>
+                </div>
+            </div>
+
+            <form id="checkout-form" onsubmit="handleCheckout(event)" class="space-y-3 pt-2">
+                <div>
+                    <input type="text" id="customer-name" required placeholder="Ваше имя" class="w-full px-3.5 py-2.5 rounded-lg bg-asphalt border border-white/15 text-xs text-white placeholder-steel focus:outline-none focus:border-white transition-colors">
+                </div>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <input type="tel" id="customer-phone" required placeholder="+7 (777) 000-00-00" class="w-full px-3.5 py-2.5 rounded-lg bg-asphalt border border-white/15 text-xs text-white placeholder-steel focus:outline-none focus:border-white transition-colors">
+                    <input type="text" id="customer-city" required placeholder="Город (Алматы, Астана...)" class="w-full px-3.5 py-2.5 rounded-lg bg-asphalt border border-white/15 text-xs text-white placeholder-steel focus:outline-none focus:border-white transition-colors">
+                </div>
+                <button type="submit" class="w-full py-3.5 bg-white text-black font-black text-xs tracking-[0.22em] uppercase rounded-lg hover:bg-zinc-200 transition-all shadow-[0_0_25px_rgba(255,255,255,0.15)]">
+                    ОФОРМИТЬ ЗАКАЗ
+                </button>
+            </form>
+        </div>
+    </aside>
+
+    <!-- INFO MODAL -->
+    <div id="info-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-obsidian border border-white/20 rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl">
+            <button onclick="closeInfoModal()" class="absolute top-5 right-5 w-8 h-8 rounded-lg bg-asphalt text-steel hover:text-white flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="info-modal-title" class="font-display text-2xl font-bold uppercase tracking-wide text-white mb-4"></h3>
+            <div id="info-modal-body" class="text-xs sm:text-sm text-steel space-y-3 leading-relaxed"></div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const products = [
+            {
+                id: 'sc-hoodie-01',
+                name: 'Heavyweight Distressed Hoodie "SC-01"',
+                category: 'hoodies',
+                categoryLabel: 'Худи',
+                gender: 'male',
+                price: 58900,
+                badge: 'NEW DROP // MEN',
+                description: 'Мужской оверсайз-крой из футера 520 GSM с ручными потертостями по краям и объемным готическим принтом StreetCast.',
+                sizes: ['S', 'M', 'L', 'XL'],
+                mockupType: 'hoodie'
+            },
+            {
+                id: 'sc-tee-gothic',
+                name: 'Gothic Logo Oversize Tee',
+                category: 'tees',
+                categoryLabel: 'Футболки',
+                gender: 'female',
+                price: 26900,
+                badge: 'WOMEN // LIMITED',
+                description: 'Женская укороченная оверсайз-футболка 280 GSM в цвете Washed Black с эффектом трещин на груди.',
+                sizes: ['S', 'M', 'L', 'XL'],
+                mockupType: 'tee'
+            },
+            {
+                id: 'sc-cargo-shadow',
+                name: 'Tactical Cargo Pants "Shadow"',
+                category: 'pants',
+                categoryLabel: 'Штаны',
+                gender: 'male',
+                price: 51900,
+                badge: 'MEN // 8 POCKETS',
+                description: 'Широкие мужские карго-брюки из армированного рипстопа со стропами, металлической фурнитурой и утяжками снизу.',
+                sizes: ['S', 'M', 'L', 'XL'],
+                mockupType: 'pants'
+            },
+            {
+                id: 'sc-zip-skull',
+                name: 'Zip-Up Skull Hoodie "Concrete"',
+                category: 'hoodies',
+                categoryLabel: 'Худи',
+                gender: 'female',
+                price: 63900,
+                badge: 'WOMEN // 520G',
+                description: 'Женское зип-худи свободной посадки с двойным бегунком, капюшоном-балаклавой и вышивкой эмблемы на спине.',
+                sizes: ['S', 'M', 'L', 'XL'],
+                mockupType: 'zip'
+            },
+            {
+                id: 'sc-beanie-cast',
+                name: 'Distressed Beanie "Cast"',
+                category: 'accessories',
+                categoryLabel: 'Аксессуары',
+                gender: 'male',
+                price: 15900,
+                badge: 'MEN // ONE SIZE',
+                description: 'Вязаная шапка-бини плотной вязки с гранж-рваниной и жаккардовым шевроном StreetCast.',
+                sizes: ['ONE SIZE'],
+                mockupType: 'beanie'
+            },
+            {
+                id: 'sc-chain-pendant',
+                name: 'Silver Chain & Pendant "SC"',
+                category: 'accessories',
+                categoryLabel: 'Аксессуары',
+                gender: 'female',
+                price: 24500,
+                badge: 'WOMEN // 316L',
+                description: 'Изящная цепь с литым готическим кулоном-медальоном. Не темнеет и не боится воды.',
+                sizes: ['55 CM', '60 CM'],
+                mockupType: 'chain'
+            },
+            {
+                id: 'sc-tee-acid',
+                name: 'Acid Wash Longsleeve "Underground"',
+                category: 'tees',
+                categoryLabel: 'Футболки',
+                gender: 'male',
+                price: 30900,
+                badge: 'MEN // NEW',
+                description: 'Мужской лонгслив кислотной варки с удлиненными рукавами и готическим леттерингом вдоль предплечий.',
+                sizes: ['S', 'M', 'L', 'XL'],
+                mockupType: 'longsleeve'
+            },
+            {
+                id: 'sc-sweatpants-void',
+                name: 'Baggy Sweatpants "Void"',
+                category: 'pants',
+                categoryLabel: 'Штаны',
+                gender: 'female',
+                price: 44500,
+                badge: 'WOMEN // 500 GSM',
+                description: 'Женские широкие спортивные штаны с высокой посадкой, необработанным краем и белой вышивкой логотипа.',
+                sizes: ['S', 'M', 'L', 'XL'],
+                mockupType: 'sweatpants'
+            }
+        ];
+
+        let currentCategory = 'all';
+        let currentGender = 'all';
+        let selectedSizes = {};
+        let cart = JSON.parse(localStorage.getItem('streetcast_cart')) || [];
+
+        products.forEach(p => {
+            selectedSizes[p.id] = p.sizes.includes('L') ? 'L' : p.sizes[0];
+        });
+
+        function formatPrice(value) {
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₸';
+        }
+
+        function selectGenderFit(gender) {
+            currentGender = gender;
+
+            const maleBtn = document.getElementById('gender-btn-male');
+            const femaleBtn = document.getElementById('gender-btn-female');
+            const catalogLabel = document.getElementById('catalog-gender-label');
+            const hint = document.getElementById('gender-selection-hint');
+
+            maleBtn.classList.remove('ring-2', 'ring-white', 'bg-white/10');
+            femaleBtn.classList.remove('ring-2', 'ring-white', 'bg-white/10');
+
+            if (gender === 'male') {
+                maleBtn.classList.add('ring-2', 'ring-white', 'bg-white/10');
+                catalogLabel.textContent = 'КАТАЛОГ // МУЖСКАЯ ПОДБОРКА';
+                hint.innerHTML = `<span class="text-white font-semibold">ВЫБРАН МУЖСКОЙ МАНЕКЕН</span><span>•</span><button type="button" onclick="selectGenderFit('all')" class="underline hover:text-white transition-colors">ПОКАЗАТЬ ВСЕ</button>`;
+                showToast('Подобраны мужские модели из каталога');
+            } else if (gender === 'female') {
+                femaleBtn.classList.add('ring-2', 'ring-white', 'bg-white/10');
+                catalogLabel.textContent = 'КАТАЛОГ // ЖЕНСКАЯ ПОДБОРКА';
+                hint.innerHTML = `<span class="text-white font-semibold">ВЫБРАН ЖЕНСКИЙ МАНЕКЕН</span><span>•</span><button type="button" onclick="selectGenderFit('all')" class="underline hover:text-white transition-colors">ПОКАЗАТЬ ВСЕ</button>`;
+                showToast('Подобраны женские модели из каталога');
+            } else {
+                catalogLabel.textContent = 'КАТАЛОГ // NEW DROP';
+                hint.innerHTML = `<span>ВЫБЕРИ МАНЕКЕН ДЛЯ ПОДБОРА</span><span>•</span><button type="button" onclick="selectGenderFit('all')" class="underline hover:text-white transition-colors">ВСЕ</button>`;
+            }
+
+            renderProducts();
+            document.getElementById('catalog').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function getProductVisualHTML(product) {
+            const logoSrc = 'Gemini_Generated_Image_f0duqyf0duqyf0du_2.jpg';
+            const svgs = {
+                hoodie: `<svg viewBox="0 0 240 240" class="w-48 h-48 drop-shadow-[0_18px_25px_rgba(0,0,0,0.95)] transition-transform duration-500 group-hover:scale-105"><path d="M82 32 C95 20, 145 20, 158 32 L172 48 L215 76 L198 158 L175 152 L175 205 L65 205 L65 152 L42 158 L25 76 L68 48 Z" fill="#141416" stroke="#3f3f46" stroke-width="1.5"/><path d="M82 32 C92 52, 148 52, 158 32 C148 16, 92 16, 82 32 Z" fill="#0c0c0e" stroke="#52525b" stroke-width="1.2"/></svg>`,
+                zip: `<svg viewBox="0 0 240 240" class="w-48 h-48 drop-shadow-[0_18px_25px_rgba(0,0,0,0.95)] transition-transform duration-500 group-hover:scale-105"><path d="M82 32 C95 20, 145 20, 158 32 L172 48 L215 76 L198 158 L175 152 L175 205 L65 205 L65 152 L42 158 L25 76 L68 48 Z" fill="#18181b" stroke="#3f3f46" stroke-width="1.5"/><line x1="120" y1="48" x2="120" y2="205" stroke="#d4d4d8" stroke-width="2" stroke-dasharray="3 2"/></svg>`,
+                tee: `<svg viewBox="0 0 240 240" class="w-48 h-48 drop-shadow-[0_18px_25px_rgba(0,0,0,0.95)] transition-transform duration-500 group-hover:scale-105"><path d="M85 38 Q120 52 155 38 L212 68 L194 114 L170 104 L170 205 L70 205 L70 104 L46 114 L28 68 Z" fill="#161618" stroke="#3f3f46" stroke-width="1.5"/></svg>`,
+                longsleeve: `<svg viewBox="0 0 240 240" class="w-48 h-48 drop-shadow-[0_18px_25px_rgba(0,0,0,0.95)] transition-transform duration-500 group-hover:scale-105"><path d="M86 38 Q120 50 154 38 L218 74 L204 176 L184 172 L170 104 L170 205 L70 205 L70 104 L56 172 L36 176 L22 74 Z" fill="#1b1b1e" stroke="#52525b" stroke-width="1.5"/></svg>`,
+                pants: `<svg viewBox="0 0 240 240" class="w-48 h-48 drop-shadow-[0_18px_25px_rgba(0,0,0,0.95)] transition-transform duration-500 group-hover:scale-105"><path d="M74 28 L166 28 L182 212 L134 212 L120 96 L106 212 L58 212 Z" fill="#151517" stroke="#3f3f46" stroke-width="1.5"/></svg>`,
+                sweatpants: `<svg viewBox="0 0 240 240" class="w-48 h-48 drop-shadow-[0_18px_25px_rgba(0,0,0,0.95)] transition-transform duration-500 group-hover:scale-105"><path d="M76 28 L164 28 L178 210 L132 210 L120 94 L108 210 L62 210 Z" fill="#121214" stroke="#3f3f46" stroke-width="1.5"/></svg>`,
+                beanie: `<svg viewBox="0 0 240 240" class="w-48 h-48 drop-shadow-[0_18px_25px_rgba(0,0,0,0.95)] transition-transform duration-500 group-hover:scale-105"><path d="M56 145 C56 75, 184 75, 184 145 L188 175 L52 175 Z" fill="#161618" stroke="#52525b" stroke-width="1.5"/><rect x="50" y="142" width="140" height="34" rx="6" fill="#1d1d20" stroke="#71717a" stroke-width="1.2"/></svg>`,
+                chain: `<svg viewBox="0 0 240 240" class="w-48 h-48 drop-shadow-[0_18px_25px_rgba(0,0,0,0.95)] transition-transform duration-500 group-hover:scale-105"><path d="M76 25 C76 110, 164 110, 164 25" fill="none" stroke="#e4e4e7" stroke-width="5" stroke-dasharray="6 3"/><circle cx="120" cy="96" r="6" fill="none" stroke="#ffffff" stroke-width="2.5"/></svg>`
+            };
+
+            return `
+                <div class="relative w-full h-72 bg-gradient-to-b from-[#141414] to-[#090909] flex items-center justify-center overflow-hidden border-b border-white/10">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.07)_0%,transparent_70%)]"></div>
+                    ${svgs[product.mockupType] || svgs.hoodie}
+                    <div class="logo-medallion w-14 h-14 absolute ${product.mockupType === 'pants' || product.mockupType === 'sweatpants' ? 'top-24 left-1/2 -translate-x-10' : product.mockupType === 'beanie' ? 'bottom-14' : product.mockupType === 'chain' ? 'bottom-11 w-11 h-11' : 'top-24'} pointer-events-none opacity-95 group-hover:scale-110 transition-transform duration-500">
+                        <img src="${logoSrc}" alt="SC Print" onerror="this.onerror=null; this.src='https://placehold.co/100x100/080808/ffffff?text=SC';">
+                    </div>
+                    <span class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded bg-black/80 border border-white/15 text-[10px] font-mono font-bold tracking-[0.18em] text-white uppercase">${product.badge}</span>
+                    <span class="absolute top-3.5 right-3.5 text-[10px] font-mono text-steel uppercase">${product.categoryLabel}</span>
+                </div>
+            `;
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const filtered = products.filter(p => {
+                const matchCategory = currentCategory === 'all' || p.category === currentCategory;
+                const matchGender = currentGender === 'all' || p.gender === currentGender;
+                return matchCategory && matchGender;
+            });
+
+            grid.innerHTML = filtered.map(product => {
+                const activeSize = selectedSizes[product.id];
+                return `
+                    <article class="product-card group bg-obsidian border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between">
+                        <div>
+                            ${getProductVisualHTML(product)}
+                            <div class="p-5 sm:p-6 space-y-3">
+                                <h3 class="font-display text-xl font-bold uppercase tracking-wide text-white leading-snug">${product.name}</h3>
+                                <p class="text-xs text-steel leading-relaxed line-clamp-2">${product.description}</p>
+                            </div>
+                        </div>
+                        <div class="px-5 sm:px-6 pb-6 pt-2 space-y-4">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-steel">Размер:</span>
+                                    <span class="text-[10px] font-mono text-white/70">${activeSize}</span>
+                                </div>
+                                <div class="flex flex-wrap gap-1.5">
+                                    ${product.sizes.map(size => `
+                                        <button onclick="selectSize('${product.id}', '${size}')" class="px-3 py-1.5 rounded text-xs font-bold tracking-wider transition-all border ${activeSize === size ? 'bg-white text-black border-white' : 'bg-asphalt text-steel border-white/10 hover:border-white/40 hover:text-white'}">${size}</button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            <div class="pt-3 border-t border-white/10 flex items-center justify-between gap-3">
+                                <div>
+                                    <div class="text-[10px] text-steel uppercase tracking-wider">Цена</div>
+                                    <div class="font-display text-2xl font-bold text-white">${formatPrice(product.price)}</div>
+                                </div>
+                                <button onclick="addToCart('${product.id}')" class="px-5 py-3 rounded-lg bg-white text-black font-black text-xs tracking-[0.16em] uppercase hover:bg-zinc-200 active:scale-95 transition-all flex items-center gap-2">
+                                    <i class="fa-solid fa-plus"></i><span>В корзину</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        function selectSize(productId, size) {
+            selectedSizes[productId] = size;
+            renderProducts();
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('bg-white', 'text-black', 'border-white');
+                    b.classList.add('bg-asphalt', 'text-steel', 'border-white/10');
+                });
+                btn.classList.remove('bg-asphalt', 'text-steel', 'border-white/10');
+                btn.classList.add('bg-white', 'text-black', 'border-white');
+                currentCategory = btn.getAttribute('data-category');
+                renderProducts();
+            });
+        });
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const size = selectedSizes[productId];
+            const existingIndex = cart.findIndex(item => item.id === productId && item.size === size);
+
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({ id: product.id, name: product.name, price: product.price, size: size, qty: 1 });
+            }
+
+            saveAndRenderCart();
+            showToast(`Добавлено: ${product.name} [${size}]`);
+        }
+
+        function updateQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) cart.splice(index, 1);
+            saveAndRenderCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveAndRenderCart();
+        }
+
+        function saveAndRenderCart() {
+            localStorage.setItem('streetcast_cart', JSON.stringify(cart));
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalSum = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+            document.getElementById('cart-badge').textContent = totalQty;
+            document.getElementById('drawer-count').textContent = `(${totalQty})`;
+            document.getElementById('cart-total').textContent = formatPrice(totalSum);
+            document.getElementById('shipping-cost').textContent = totalSum >= 30000 || totalSum === 0 ? 'Бесплатно' : '2 500 ₸';
+
+            const container = document.getElementById('cart-items-container');
+            const footer = document.getElementById('cart-footer');
+
+            if (cart.length === 0) {
+                footer.classList.add('hidden');
+                container.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center py-12 space-y-4">
+                        <div class="logo-medallion w-20 h-20 opacity-40"><img src="Gemini_Generated_Image_f0duqyf0duqyf0du_2.jpg" alt="Empty" onerror="this.onerror=null; this.src='https://placehold.co/150x150/080808/ffffff?text=SC';"></div>
+                        <div class="font-display text-xl uppercase tracking-wider text-white">Корзина пуста</div>
+                        <button onclick="toggleCart(false)" class="mt-2 px-6 py-2.5 rounded-lg bg-white text-black text-xs font-bold uppercase tracking-widest">В каталог</button>
+                    </div>
+                `;
+                return;
+            }
+
+            footer.classList.remove('hidden');
+            container.innerHTML = cart.map((item, idx) => `
+                <div class="bg-asphalt border border-white/10 rounded-xl p-4 flex items-center justify-between gap-4">
+                    <div class="logo-medallion w-12 h-12 shrink-0"><img src="Gemini_Generated_Image_f0duqyf0duqyf0du_2.jpg" alt="Item" onerror="this.onerror=null; this.src='https://placehold.co/100x100/080808/ffffff?text=SC';"></div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-xs font-bold text-white truncate">${item.name}</h4>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span class="px-2 py-0.5 rounded bg-black text-[10px] font-mono text-white border border-white/15">РАЗМЕР: ${item.size}</span>
+                            <span class="text-xs font-semibold text-steel">${formatPrice(item.price)}</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 mt-3">
+                            <button onclick="updateQty(${idx}, -1)" class="w-6 h-6 rounded bg-black border border-white/15 text-xs text-white">-</button>
+                            <span class="text-xs font-mono font-bold w-4 text-center">${item.qty}</span>
+                            <button onclick="updateQty(${idx}, 1)" class="w-6 h-6 rounded bg-black border border-white/15 text-xs text-white">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${idx})" class="text-steel hover:text-white p-1.5"><i class="fa-solid fa-trash-can text-xs"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function toggleCart(open) {
+            const backdrop = document.getElementById('cart-backdrop');
+            const drawer = document.getElementById('cart-drawer');
+            if (open) {
+                backdrop.classList.remove('hidden');
+                setTimeout(() => backdrop.classList.remove('opacity-0'), 10);
+                drawer.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden';
+            } else {
+                backdrop.classList.add('opacity-0');
+                drawer.classList.add('translate-x-full');
+                setTimeout(() => backdrop.classList.add('hidden'), 300);
+                document.body.style.overflow = '';
+            }
+        }
+
+        // ==================== ИНТЕГРАЦИЯ WEB3FORMS ====================
+        async function handleCheckout(e) {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            
+            const customerData = {
+                name: document.getElementById('customer-name').value.trim(),
+                phone: document.getElementById('customer-phone').value.trim(),
+                address: document.getElementById('customer-city').value.trim()
+            };
+
+            const orderNum = Math.floor(1000 + Math.random() * 9000);
+            const itemsSum = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            const shippingCost = itemsSum >= 30000 ? 0 : 2500;
+            const totalPrice = itemsSum + shippingCost;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'ОТПРАВКА...';
+
+            const result = await sendOrder(cart, totalPrice, customerData, orderNum);
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+
+            if (result.ok) {
+                cart = [];
+                saveAndRenderCart();
+                toggleCart(false);
+                e.target.reset();
+                showToast(`Заказ #SC-${orderNum} принят! Рахмет, ${customerData.name}. Мы скоро свяжемся с вами.`, 5500);
+            } else {
+                showToast(`Ошибка отправки: ${result.error}`, 6500);
+            }
+        }
+
+        async function sendOrder(cartItems, totalPrice, customerData, orderNum) {
+            const ACCESS_KEY = '3ba811a4-850b-4d38-976a-83a9b62f9f64';
+
+            const itemsList = cartItems.map((item, index) => 
+                `${index + 1}. ${item.name} [Размер: ${item.size}] — ${item.qty} шт. (${formatPrice(item.price * item.qty)})`
+            ).join('\n');
+
+            const payload = {
+                access_key: ACCESS_KEY,
+                subject: `Новый заказ #SC-${orderNum} — STREETCAST KZ`,
+                from_name: 'STREETCAST KAZAKHSTAN',
+                'Номер заказа': `#SC-${orderNum}`,
+                'Имя клиента': customerData.name,
+                'Телефон': customerData.phone,
+                'Город / Адрес (РК)': customerData.address,
+                'Состав заказа': `\n${itemsList}`,
+                'Итого к оплате': formatPrice(totalPrice)
+            };
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    return { ok: true };
+                } else {
+                    return { ok: false, error: data.message || 'Не удалось отправить заказ' };
+                }
+            } catch (error) {
+                console.error('Ошибка сети:', error);
+                return { ok: false, error: 'Проверьте подключение к интернету' };
+            }
+        }
+
+        function showToast(message, duration = 3200) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto flex items-center gap-3 bg-obsidian border border-white/25 text-white px-4 py-3.5 rounded-xl shadow-2xl max-w-sm transform translate-y-4 opacity-0 transition-all duration-300';
+            toast.innerHTML = `<div class="w-2 h-2 rounded-full bg-white shrink-0"></div><span class="text-xs font-medium leading-snug">${message}</span>`;
+            container.appendChild(toast);
+            requestAnimationFrame(() => toast.classList.remove('translate-y-4', 'opacity-0'));
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        const infoContent = {
+            delivery: {
+                title: 'Доставка и оплата по Казахстану',
+                body: `
+                    <p><strong class="text-white">Отправка заказов:</strong> В течение 24 часов после подтверждения.</p>
+                    <p><strong class="text-white">Службы доставки по РК:</strong> Курьерская доставка до двери по Алматы и Астане, экспресс-отправка СДЭК, Казпочта и inDrive Курьер в любой регион Казахстана.</p>
+                    <p><strong class="text-white">Оплата и стоимость:</strong> Бесплатная доставка при заказе от 30 000 ₸. При сумме до 30 000 ₸ — фиксировано 2 500 ₸. Доступна оплата через Kaspi QR / перевод или банковской картой.</p>
+                `
+            },
+            returns: {
+                title: 'Обмен и возврат',
+                body: `
+                    <p>В соответствии с законодательством Республики Казахстан вы можете обменять размер или вернуть изделие в течение <strong class="text-white">14 дней</strong> с момента получения заказа.</p>
+                    <p>Товар должен сохранить первоначальный вид, фабричные ярлыки, пломбы и фирменную зип-упаковку StreetCast.</p>
+                `
+            },
+            sizing: {
+                title: 'Таблица размеров (Oversize Fit)',
+                body: `
+                    <p class="text-white font-semibold">Все худи и футболки имеют свободный кроп-оверсайз крой:</p>
+                    <ul class="space-y-1.5 font-mono text-xs bg-void p-3.5 rounded-lg border border-white/10">
+                        <li>S  — рост 160–170 см (длина 68 см, ширина 60 см)</li>
+                        <li>M  — рост 170–178 см (длина 71 см, ширина 63 см)</li>
+                        <li>L  — рост 178–186 см (длина 74 см, ширина 66 см)</li>
+                        <li>XL — рост 186–195 см (длина 77 см, ширина 69 см)</li>
+                    </ul>
+                `
+            }
+        };
+
+        function openInfoModal(key) {
+            const modal = document.getElementById('info-modal');
+            document.getElementById('info-modal-title').textContent = infoContent[key].title;
+            document.getElementById('info-modal-body').innerHTML = infoContent[key].body;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeInfoModal() {
+            const modal = document.getElementById('info-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function startDropTimer() {
+            let totalSeconds = 4 * 86400 + 18 * 3600 + 42 * 60 + 19;
+            setInterval(() => {
+                if (totalSeconds <= 0) return;
+                totalSeconds--;
+                const d = Math.floor(totalSeconds / 86400);
+                const h = Math.floor((totalSeconds % 86400) / 3600);
+                const m = Math.floor((totalSeconds % 3600) / 60);
+                const s = totalSeconds % 60;
+                document.getElementById('timer-days').textContent = String(d).padStart(2, '0');
+                document.getElementById('timer-hours').textContent = String(h).padStart(2, '0');
+                document.getElementById('timer-mins').textContent = String(m).padStart(2, '0');
+                document.getElementById('timer-secs').textContent = String(s).padStart(2, '0');
+            }, 1000);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            saveAndRenderCart();
+            startDropTimer();
+        });
+    </script>
+</body>
+</html>
